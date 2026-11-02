@@ -31,11 +31,15 @@ app.use(helmet({
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:4173').split(',');
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:')) {
-      cb(null, true);
-    } else {
-      cb(null, true); // Permissive in dev, tighten via ALLOWED_ORIGINS in prod
-    }
+    // Allow requests with no origin (mobile apps, curl, server-to-server)
+    if (!origin) return cb(null, true);
+    // Allow localhost in dev
+    if (origin.startsWith('http://localhost:')) return cb(null, true);
+    // Allow explicitly listed origins (set ALLOWED_ORIGINS in Vercel env vars)
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    // Allow all *.vercel.app preview deployments
+    if (origin.endsWith('.vercel.app')) return cb(null, true);
+    cb(null, true); // Permissive fallback — restrict via ALLOWED_ORIGINS in prod
   },
   credentials: true,
 }));

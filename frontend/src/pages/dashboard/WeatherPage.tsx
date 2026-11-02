@@ -44,7 +44,7 @@ export default function WeatherPage() {
 
   const fetchWeather = () => {
     setLoading(true);
-    fetch(`http://localhost:4000/api/weather?lat=${activeLocation.lat}&lon=${activeLocation.lon}&name=${encodeURIComponent(activeLocation.name)}`)
+    fetch(`/api/weather?lat=${activeLocation.lat}&lon=${activeLocation.lon}&name=${encodeURIComponent(activeLocation.name)}`)
       .then((r) => r.json())
       .then((data) => {
         setWeather(data);

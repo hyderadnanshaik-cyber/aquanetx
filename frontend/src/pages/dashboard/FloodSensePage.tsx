@@ -63,7 +63,7 @@ export default function FloodSensePage() {
   // 1. Fetch live ML prediction & data
   const fetchPrediction = (extraRainMm = 0) => {
     setLoading(true);
-    fetch(`http://localhost:4000/api/flood/predict?lat=${activeLocation.lat}&lon=${activeLocation.lon}`)
+    fetch(`/api/flood/predict?lat=${activeLocation.lat}&lon=${activeLocation.lon}`)
       .then((r) => r.json())
       .then((d) => {
         const pred = d.mlEngine || d.prediction;
@@ -121,13 +121,13 @@ export default function FloodSensePage() {
     fetchPrediction(simulatedSurgeMm);
 
     // Fetch ML evaluation metrics
-    fetch('http://localhost:4000/api/ml/metrics')
+    fetch('/api/ml/metrics')
       .then((r) => r.json())
       .then((d) => setMlMetrics(d))
       .catch((e) => console.warn('Metrics fetch error:', e));
 
     // Fetch CWC Telemetry stations
-    fetch('http://localhost:4000/api/ml/stations')
+    fetch('/api/ml/stations')
       .then((r) => r.json())
       .then((d) => setStations(d.stations || []))
       .catch((e) => console.warn('Stations fetch error:', e));

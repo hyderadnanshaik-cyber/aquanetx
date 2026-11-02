@@ -81,7 +81,7 @@ export default function WaterStressPage() {
 
   const fetchGroundwater = (stateName: string, useCoords: boolean) => {
     setLoading(true);
-    let url = `http://localhost:4000/api/groundwater/quality?limit=100`;
+    let url = `/api/groundwater/quality?limit=100`;
     if (useCoords) {
       url += `&lat=${activeLocation.lat}&lon=${activeLocation.lon}`;
     }

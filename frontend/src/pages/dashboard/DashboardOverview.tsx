@@ -40,7 +40,7 @@ export default function DashboardOverview() {
 
   useEffect(() => {
     // Fetch live weather telemetry
-    fetch(`http://localhost:4000/api/weather?lat=${activeLocation.lat}&lon=${activeLocation.lon}&name=${encodeURIComponent(activeLocation.name)}`)
+    fetch(`/api/weather?lat=${activeLocation.lat}&lon=${activeLocation.lon}&name=${encodeURIComponent(activeLocation.name)}`)
       .then((r) => r.json())
       .then((d) => {
         if (d.current) {
@@ -56,7 +56,7 @@ export default function DashboardOverview() {
       });
 
     // Fetch live flood prediction
-    fetch(`http://localhost:4000/api/flood/predict?lat=${activeLocation.lat}&lon=${activeLocation.lon}`)
+    fetch(`/api/flood/predict?lat=${activeLocation.lat}&lon=${activeLocation.lon}`)
       .then((r) => r.json())
       .then((d) => {
         const pred = d.mlEngine || d.prediction;
