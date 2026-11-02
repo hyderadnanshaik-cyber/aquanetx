@@ -1,0 +1,43 @@
+{
+  "model_type": "CalibratedHydrologicalGradientModel",
+  "version": "v3.0",
+  "thresholds": {
+    "low_risk": 0.25,
+    "moderate_risk": 0.5,
+    "high_risk": 0.75,
+    "severe_risk": 0.9
+  },
+  "feature_weights": {
+    "rain_1h": 0.0417,
+    "rain_3h": 0.0577,
+    "rain_6h": 0.2095,
+    "rain_24h": 0.3834,
+    "rain_72h": 0.0907,
+    "rain_diff": 0.0042,
+    "api_index": 0.2117,
+    "Latitude": 0.0006,
+    "Longitude": 0.0004
+  },
+  "mean_values": {
+    "rain_1h": 96.0678,
+    "rain_3h": 256.8835,
+    "rain_6h": 487.5093,
+    "rain_24h": 1789.3388,
+    "rain_72h": 5033.7048,
+    "rain_diff": 0.0459,
+    "api_index": 2404.7808,
+    "Latitude": 16.8901,
+    "Longitude": 81.6259
+  },
+  "std_values": {
+    "rain_1h": 165.9066,
+    "rain_3h": 446.6036,
+    "rain_6h": 857.9795,
+    "rain_24h": 3216.6224,
+    "rain_72h": 9136.2387,
+    "rain_diff": 41.2021,
+    "api_index": 4321.0983,
+    "Latitude": 2.4631,
+    "Longitude": 2.3107
+  }
+}

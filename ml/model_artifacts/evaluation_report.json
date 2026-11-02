@@ -1,0 +1,87 @@
+{
+  "pipeline_version": "AquaNetX-FloodSense-v3.0",
+  "timestamp": "2026-11-02T17:39:45.971510Z",
+  "dataset_name": "Central Water Commission (CWC) Telemetry Hourly Rainfall (AP/Telangana)",
+  "geographic_coverage": "Godavari, Krishna, Nagavali, Pennar River Basins (10 Districts, 27 Telemetry Stations)",
+  "temporal_range": {
+    "start": "2021-01-01 05:30:00",
+    "end": "2025-12-29 07:30:00"
+  },
+  "train_samples": 25423,
+  "test_samples": 5851,
+  "features_used": [
+    "rain_1h",
+    "rain_3h",
+    "rain_6h",
+    "rain_24h",
+    "rain_72h",
+    "rain_diff",
+    "api_index",
+    "Latitude",
+    "Longitude"
+  ],
+  "models": {
+    "Baseline_LogisticRegression": {
+      "model_name": "Baseline Logistic Regression",
+      "accuracy": 0.9863,
+      "precision": 0.9794,
+      "recall": 0.9847,
+      "f1_score": 0.982,
+      "roc_auc": 0.9994,
+      "pr_auc": 0.999,
+      "brier_score": 0.0097,
+      "false_negative_rate": 0.0153,
+      "confusion_matrix": {
+        "true_negatives": 3587,
+        "false_positives": 46,
+        "false_negatives": 34,
+        "true_positives": 2184
+      }
+    },
+    "RandomForest": {
+      "model_name": "Random Forest (Depth 8)",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0003,
+      "false_negative_rate": 0.0,
+      "confusion_matrix": {
+        "true_negatives": 3633,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "true_positives": 2218
+      }
+    },
+    "Champion_GradientBoosting": {
+      "model_name": "HistGradientBoosting (Champion)",
+      "accuracy": 0.9985,
+      "precision": 0.9973,
+      "recall": 0.9986,
+      "f1_score": 0.998,
+      "roc_auc": 1.0,
+      "pr_auc": 1.0,
+      "brier_score": 0.0013,
+      "false_negative_rate": 0.0014,
+      "confusion_matrix": {
+        "true_negatives": 3627,
+        "false_positives": 6,
+        "false_negatives": 3,
+        "true_positives": 2215
+      }
+    }
+  },
+  "feature_importances": {
+    "rain_1h": 0.0417,
+    "rain_3h": 0.0577,
+    "rain_6h": 0.2095,
+    "rain_24h": 0.3834,
+    "rain_72h": 0.0907,
+    "rain_diff": 0.0042,
+    "api_index": 0.2117,
+    "Latitude": 0.0006,
+    "Longitude": 0.0004
+  }
+}

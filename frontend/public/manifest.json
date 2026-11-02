@@ -1,0 +1,14 @@
+{
+  "name": "AQUANET X",
+  "short_name": "AQUANET X",
+  "description": "Urban water intelligence and emergency safety platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B2E42",
+  "theme_color": "#0B2E42",
+  "orientation": "any",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
