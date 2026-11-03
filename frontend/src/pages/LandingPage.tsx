@@ -118,9 +118,17 @@ export default function LandingPage() {
       document.querySelectorAll('#hero .hd, #hero .fade').forEach((e) => e.classList.add('in'));
     }, 150);
 
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node) && !(e.target as Element).closest('#bg')) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      document.removeEventListener('click', handleOutsideClick);
       io.disconnect();
     };
   }, []);
