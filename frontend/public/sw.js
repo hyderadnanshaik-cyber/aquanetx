@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aquanetx-v1';
+const CACHE_NAME = 'aquanetx-v2';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -22,13 +22,29 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch — network-first for API, cache-first for assets
+// Fetch — network-first for navigation & API, cache-first for static assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
   // Skip non-GET and chrome-extension
   if (request.method !== 'GET' || url.protocol === 'chrome-extension:') return;
+
+  // Navigation requests (HTML pages) — Network first, cache fallback for offline
+  if (request.mode === 'navigate' || url.pathname === '/') {
+    event.respondWith(
+      fetch(request)
+        .then((res) => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then((c) => c.put(request, clone));
+          }
+          return res;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
+    );
+    return;
+  }
 
   // API calls — network first with fallback
   if (url.pathname.startsWith('/api/')) {
@@ -46,7 +62,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets — cache first
+  // Static assets — cache first with network fallback
   event.respondWith(
     caches.match(request).then(
       (cached) => cached || fetch(request).then((res) => {
